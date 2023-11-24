@@ -45,7 +45,7 @@ func (b *Board) isSafe(row, col, num int) bool {
 	return true
 }
 
-// solveSudoku solve a partially filled-in grid and attempts
+// SolveSudoku solve a partially filled-in grid and attempts
 // to assign values to all unassigned locations in
 // such a way to meet the requirements for
 // Sudoku solution (non-duplication across rows,
@@ -105,7 +105,7 @@ func (b *Board) SolveSudoku(row, col int) bool {
 	return false
 }
 
-// printing a utility function to print grid
+// Printing a utility function to print grid
 func (b *Board) Printing() {
 	for i := 0; i < N; i++ {
 		for j := 0; j < N; j++ {
