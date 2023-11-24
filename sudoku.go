@@ -8,10 +8,13 @@ import (
 // https://www.geeksforgeeks.org/sudoku-backtracking-7/
 
 const (
+	// N is the board size 9*9
 	N = 9
+	// M is the sub matrix size 3*3
 	M = 3
 )
 
+// Board represent the sudoku board
 type Board [N][N]int
 
 // isSafe checks whether it will be
