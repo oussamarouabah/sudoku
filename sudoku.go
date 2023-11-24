@@ -1,52 +1,23 @@
-package main
+package sudoku
 
 import (
 	"fmt"
-	"time"
 )
 
 // based on a solution found here
 // https://www.geeksforgeeks.org/sudoku-backtracking-7/
-
-func main() {
-	start := time.Now()
-	solveSudoku()
-	take := time.Since(start)
-	fmt.Printf("is took %s to solve the problem\n", take.String())
-}
-
-func solveSudoku() {
-	// 0 means unassigned cells
-	var b = board{
-		[N]int{3, 0, 6, 5, 0, 8, 4, 0, 0},
-		[N]int{5, 2, 0, 0, 0, 0, 0, 0, 0},
-		[N]int{0, 8, 7, 0, 0, 0, 0, 3, 1},
-		[N]int{0, 0, 3, 0, 1, 0, 0, 8, 0},
-		[N]int{9, 0, 0, 8, 6, 3, 0, 0, 5},
-		[N]int{0, 5, 0, 0, 9, 0, 6, 0, 0},
-		[N]int{1, 3, 0, 0, 0, 0, 2, 5, 0},
-		[N]int{0, 0, 0, 0, 0, 0, 0, 7, 4},
-		[N]int{0, 0, 5, 2, 0, 6, 3, 0, 0},
-	}
-
-	if b.solveSudoku(0, 0) {
-		b.printing()
-	} else {
-		fmt.Println("no solution  exists ")
-	}
-}
 
 const (
 	N = 9
 	M = 3
 )
 
-type board [N][N]int
+type Board [N][N]int
 
 // isSafe checks whether it will be
 // legal to assign num to the
 // given row, col
-func (b *board) isSafe(row, col, num int) bool {
+func (b *Board) isSafe(row, col, num int) bool {
 	// Check if we find the same num
 	// in the similar row or column, we
 	// return false
@@ -76,7 +47,7 @@ func (b *board) isSafe(row, col, num int) bool {
 // such a way to meet the requirements for
 // Sudoku solution (non-duplication across rows,
 // columns, and boxes)
-func (b *board) solveSudoku(row, col int) bool {
+func (b *Board) SolveSudoku(row, col int) bool {
 	// Check if we have reached the 8th
 	// row and 8th column (0
 	// indexed matrix) , we are
@@ -98,7 +69,7 @@ func (b *board) solveSudoku(row, col int) bool {
 	// the grid already contains
 	// value >0, we iterate for next column
 	if b[row][col] > 0 {
-		return b.solveSudoku(row, col+1)
+		return b.SolveSudoku(row, col+1)
 	}
 
 	for num := 1; num <= N; num++ {
@@ -116,7 +87,7 @@ func (b *board) solveSudoku(row, col int) bool {
 			b[row][col] = num
 			// Checking for next possibility with next
 			// column
-			if b.solveSudoku(row, col+1) {
+			if b.SolveSudoku(row, col+1) {
 				return true
 			}
 		}
@@ -132,7 +103,7 @@ func (b *board) solveSudoku(row, col int) bool {
 }
 
 // printing a utility function to print grid
-func (b *board) printing() {
+func (b *Board) Printing() {
 	for i := 0; i < N; i++ {
 		for j := 0; j < N; j++ {
 			fmt.Print(b[i][j], " ")
